@@ -13,6 +13,21 @@ const userSchema = new Schema({
         type: String,
         required: false
        },
+       plan: {
+        type: String,
+        enum: ["free", "pro", "enterprise"],
+        default: "free"
+       },
+       monthlyUsage: {
+        type: Number,
+        default: 0
+       },
+       privacy: {
+        autoDeleteFiles: {
+          type: Boolean,
+          default: false
+        }
+       },
        profilePic:{
         type: String,
        },

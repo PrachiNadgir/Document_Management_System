@@ -48,7 +48,7 @@ export const notifications = [
   {
     id: 3,
     title: 'Weekly usage',
-    message: 'You have 3 free analyses left this month.',
+    message: 'Unlimited analyses available',
     time: '1 hr ago',
     read: true,
   },
@@ -299,7 +299,7 @@ export const filterOptions = {
 
 export const dashboardStats = [
   { label: 'Documents analysed', value: '24', hint: '↑ 8 this week', tone: 'text-emerald-600' },
-  { label: 'Free analyses left', value: '3', hint: 'Resets in 18 days', tone: 'text-amber-600' },
+{ label: 'Analyses', value: 'Unlimited',tone: 'text-emerald-600' },
   { label: 'Avg. analysis time', value: '1.2s', hint: '↑ 12% faster', tone: 'text-emerald-600' },
   { label: 'Accuracy score', value: '97%', hint: 'Excellent', tone: 'text-emerald-600' },
 ]

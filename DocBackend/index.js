@@ -1,12 +1,11 @@
 const express = require("express");
 const dotenv = require("dotenv");
+dotenv.config();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
-const authRoutes = require("./routes/authRoute");
-const userRoutes = require("./routes/userRoute");
-
-dotenv.config();
+const apiRoutes = require("./routes");
+const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -26,13 +25,8 @@ app.get("/", (req, res) => {
   res.json({ message: "DocBackend API is running" });
 });
 
-app.use("/api/auth", authRoutes);
-app.use("/api/user", userRoutes);
-
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ message: "Internal server error" });
-});
+app.use("/api", apiRoutes);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

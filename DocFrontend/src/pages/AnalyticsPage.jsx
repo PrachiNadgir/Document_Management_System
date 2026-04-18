@@ -3,10 +3,10 @@ import PieChartCard from '../components/charts/PieChartCard'
 import TimelineChartCard from '../components/charts/TimelineChartCard'
 import WordCloudCard from '../components/charts/WordCloudCard'
 import FilterDropdown from '../components/ui/FilterDropdown'
-import { analyticsData, filterOptions } from '../data/mockData'
+import { filterOptions } from '../data/mockData'
 import { useNavigate } from 'react-router-dom'
 
-function AnalyticsPage({ filters,onFilterChange }) {
+function AnalyticsPage({ analytics, filters, loading, onFilterChange }) {
   const navigate = useNavigate();
   return (
     <div className="grid gap-6 lg:grid-cols-[264px_minmax(0,1fr)]">
@@ -74,8 +74,7 @@ function AnalyticsPage({ filters,onFilterChange }) {
             Visual insights for your workspace
           </h1>
           <p className="mt-4 max-w-4xl text-[15px] leading-7 text-stone-500">
-            These chart placeholders mirror category, sentiment, timeline, and keyword views.
-            They are ready to be swapped for Recharts or Chart.js when you want real visualizations.
+            These charts now reflect your backend-backed document and analysis data.
           </p>
           <p className="mt-5 text-sm text-stone-400">
             Active filters: {filters.category}, {filters.sentiment}, {filters.dateRange}
@@ -83,11 +82,14 @@ function AnalyticsPage({ filters,onFilterChange }) {
         </section>
 
         <div className="grid gap-5 xl:grid-cols-2">
-          <PieChartCard items={analyticsData.categories} />
-          <BarChartCard items={analyticsData.sentiment} />
-          <TimelineChartCard items={analyticsData.uploads} />
-          <WordCloudCard words={analyticsData.keywords} />
+          <PieChartCard items={analytics?.categories || []} />
+          <BarChartCard items={analytics?.sentiment || []} />
+          <TimelineChartCard items={analytics?.uploads || []} />
+          <WordCloudCard words={analytics?.keywords || []} />
         </div>
+        {!loading && (!analytics?.categories?.length && !analytics?.keywords?.length) ? (
+          <p className="text-sm text-stone-500">Upload and analyse documents to populate analytics.</p>
+        ) : null}
       </div>
     </div>
   )

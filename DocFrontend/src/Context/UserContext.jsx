@@ -1,7 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { userDataContext } from "./userDataContext";
 
-export const userDataContext = createContext();
+const UserDataProvider = userDataContext.Provider;
 
 const UserContext = ({ children }) => {
   // ❗ keep it dynamic (no hardcoding)
@@ -18,7 +19,7 @@ const UserContext = ({ children }) => {
       });
 
       setUserData(res.data);
-    } catch (error) {
+    } catch {
       setUserData(null);
     } finally {
       setLoading(false);
@@ -50,7 +51,7 @@ const UserContext = ({ children }) => {
   }, [serverURL]);
 
   return (
-    <userDataContext.Provider
+    <UserDataProvider
       value={{
         userData,
         setUserData,
@@ -61,7 +62,7 @@ const UserContext = ({ children }) => {
       }}
     >
       {children}
-    </userDataContext.Provider>
+    </UserDataProvider>
   );
 };
 

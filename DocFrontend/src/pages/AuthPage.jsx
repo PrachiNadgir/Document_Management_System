@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useNavigate, useLocation } from "react-router-dom";
-import { userDataContext } from "../Context/UserContext";
+import { userDataContext } from "../Context/userDataContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { GoogleLogin } from "@react-oauth/google";
@@ -78,7 +78,7 @@ const AuthPage = () => {
       setUserData(res.data);
       toast.success("Google login successful 🚀");
       navigate("/dashboard");
-    } catch (error) {
+    } catch {
       toast.error("Google login failed");
     }
   };

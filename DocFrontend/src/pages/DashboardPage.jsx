@@ -1,7 +1,6 @@
-import { dashboardStats } from '../data/mockData'
 import { useNavigate } from 'react-router-dom'
 
-function DashboardPage({ documents = [] }) {
+function DashboardPage({ documents = [], stats = [], loading = false }) {
   const navigate = useNavigate();
   return (
     <div className="space-y-7">
@@ -20,7 +19,7 @@ function DashboardPage({ documents = [] }) {
       </div>
 
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {dashboardStats.map((stat) => (
+        {stats.map((stat) => (
           <article key={stat.label} className="rounded-[1.8rem] border border-stone-200 bg-white p-6">
             <p className="text-4xl font-light tracking-tight text-stone-900 sm:text-5xl">{stat.value}</p>
             <p className="mt-2 text-base text-stone-500">{stat.label}</p>
@@ -59,6 +58,13 @@ function DashboardPage({ documents = [] }) {
               </tr>
             </thead>
             <tbody>
+              {!loading && documents.length === 0 ? (
+                <tr className="border-t border-stone-100">
+                  <td colSpan="5" className="px-6 py-8 text-center text-stone-500">
+                    No analysed documents yet.
+                  </td>
+                </tr>
+              ) : null}
               {documents.slice(0, 5).map((document) => (
                 <tr key={document.id} className="border-t border-stone-100">
                   <td className="px-6 py-5">

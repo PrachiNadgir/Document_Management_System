@@ -2,7 +2,7 @@ import { heroFeatures, pricingTiers, workflowSteps } from '../data/mockData'
 import { useNavigate } from 'react-router-dom'
 import Footer from '../components/layout/Footer'
 
-function HomePage({ }) {
+function HomePage() {
   const navigate = useNavigate()
 
   return (

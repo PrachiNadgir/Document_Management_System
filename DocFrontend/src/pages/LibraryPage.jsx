@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-function LibraryPage({ documents }) {
+function LibraryPage({ documents = [], loading = false }) {
   const navigate = useNavigate();
   return (
     <div className="space-y-8">
@@ -18,6 +18,11 @@ function LibraryPage({ documents }) {
       </div>
 
       <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {!loading && documents.length === 0 ? (
+          <div className="rounded-[1.8rem] border border-stone-200 bg-white p-8 text-stone-500">
+            No documents found yet. Upload your first file to start analysing.
+          </div>
+        ) : null}
         {documents.map((document) => (
           <button
             key={document.id}

@@ -2,7 +2,7 @@ import FilterDropdown from '../ui/FilterDropdown'
 import { filterOptions, workspaceNav } from '../../data/mockData'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-function Sidebar({ activePage, filters, onFilterChange }) {
+function Sidebar({ filters, onFilterChange }) {
   const navigate = useNavigate();
   const location = useLocation(); // ✅ added
 
